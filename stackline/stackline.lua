@@ -7,10 +7,10 @@ local log   = hs.logger.new('stackline', 'info')
 local click = hs.eventtap.event.types['leftMouseDown'] -- fyi, print hs.eventtap.event.types to see all event types
 
 log.i'Loading module: stackline'
-_G.u = require 'lib.utils'
+_G.u = require 'stackline.lib.utils'
 _G.stackline = {} -- access stackline under global 'stackline'
-stackline.config = require'stackline.configmanager'
-stackline.window = require'stackline.window'
+stackline.config = require'stackline.stackline.configmanager'
+stackline.window = require'stackline.stackline.window'
 
 function stackline:init(userConfig) -- {{{
     log.i'Initializing stackline'
@@ -23,7 +23,7 @@ function stackline:init(userConfig) -- {{{
 
     -- init stackmanager, & run update right away
     -- NOTE: Requires self.config to be initialized first
-    self.manager = require'stackline.stackmanager':init()
+    self.manager = require'stackline.stackline.stackmanager':init()
     self.manager:update({forceRedraw=true})
 
     -- Reuseable update fn that runs at most once every maxRefreshRate (default 0.3s)
